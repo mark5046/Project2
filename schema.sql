@@ -1,0 +1,6 @@
+DROP DATABASE IF EXISTS instacode;
+CREATE DATABASE instacode;
+
+USE instacode;
+
+CREATE TABLE 
