@@ -2,7 +2,7 @@ var bcrypt = require("bcrypt-nodejs")
 
 module.exports = (sequelize, DataTypes) => {
 
-    var Creator = sequelize.define("creator", {
+    var Creator = sequelize.define("Creator", {
         
         user_name: {
             type: DataTypes.STRING,
@@ -45,20 +45,20 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
-    Creator.associate = (models) => {
+    Creator.associate = function (models) {
 
         Creator.hasMany(models.Post, {
-            onDelete: "CASCADE"
+            onDelete: "cascade"
         });
     };
 
-    Creator.prototype.validPassword = function(password) {
-        return bcrypt.compareSync(password, this.password);
-      };
+    // Creator.prototype.validPassword = function(password) {
+    //     return bcrypt.compareSync(password, this.password);
+    //   };
 
-      Creator.hook("beforeCreate", function(creator) {
-        creator.password = bcrypt.hashSync(creator.password, bcrypt.genSaltSync(10), null);
-      });
+    //   Creator.hook("beforeCreate", function(creator) {
+    //     creator.password = bcrypt.hashSync(creator.password, bcrypt.genSaltSync(10), null);
+    //   });
 
     return Creator;
 }
