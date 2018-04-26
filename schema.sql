@@ -14,7 +14,7 @@ CREATE TABLE creator (
     PRIMARY KEY (id)
     );
 
-CREATE TABLE project (
+CREATE TABLE post (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(120) NOT NULL,
     description TEXT NULL,
