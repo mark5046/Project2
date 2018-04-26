@@ -8,4 +8,5 @@ module.exports = (sequelize, DataTypes) => {
             validate: {}
         }
     })
+    return Signup;
 }
