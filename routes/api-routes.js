@@ -6,11 +6,11 @@ module.exports = function(app) {
     res.json("/feed");
   });
 
-  app.post("/signup", function(req, res) {
+  app.post("/register", function(req, res) {
     console.log(req.body);
     db.User.create({
+      username: req.body.user_name,
       email: req.body.email,
-      password: req.body.password,
       password: req.body.password,
       profile_pic: req.body.profile_pic,
       github_link: req.body.github_link,
