@@ -3,14 +3,18 @@ var passport = require("../config/passport");
 
 module.exports = function(app) {
   app.post("/login", passport.authenticate("local"), function(req, res) {
-    res.json("/");
+    res.json("/feed");
   });
 
   app.post("/signup", function(req, res) {
     console.log(req.body);
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      password: req.body.password,
+      profile_pic: req.body.profile_pic,
+      github_link: req.body.github_link,
+      bio: req.body.bio
     }).then(function() {
       res.redirect(307, "/login");
     }).catch(function(err) {
