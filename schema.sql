@@ -3,7 +3,7 @@ CREATE DATABASE instacode;
 
 USE instacode;
 
-CREATE TABLE creator (
+CREATE TABLE user (
     id INT NOT NULL AUTO_INCREMENT,
     user_name VARCHAR(30) NOT NULL,
     password VARCHAR(30) NOT NULL,
