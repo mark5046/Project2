@@ -1,7 +1,10 @@
 // $(document).ready(function () {
-//     // var loginForm = $("form.login");
-//     // var emailInput = $("input#loginemail-input");
-//     // var passwordInput = $("input#loginpassword-input");
+//     // var updateForm = $("form.update");
+//     // var emailInput = $("input#update-input");
+//     // var passwordInput = $("input#updatepassword-input");
+    // var profile_picInput = $("input#updatepic-input");
+    // var github_linkInput = $("input#updatelink-input");
+    // var bioInput = $("input#updatebio-input")
   
 //     $("#login-btn").on("click", function (event) {
 //       event.preventDefault()
