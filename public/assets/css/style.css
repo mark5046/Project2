@@ -260,3 +260,25 @@ img {
   text-decoration: none;
   cursor: pointer;
 }
+
+#profile {
+  margin-top: 100px;
+  max-width: 975px;
+  padding: 60px;
+}
+
+.profile-img {
+  width: 150px;
+}
+
+.bio {
+  text-align: left;
+}
+
+.bio-p {
+  color: black;
+}
+
+.bio-list {
+  list-style: none;
+}

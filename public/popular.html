@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Roboto" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+  <script type="text/javascript " src="./assets/javascript/index.js"></script>
+  <title>Project2</title>
+</head>
+
+<body>
+
+  <nav id="navbar" class="navbar">
+
+    <div class="name">
+
+      <img id="main-logo" class="logo" src="assets/images/logo.png" alt="Logo">
+      <h1 id="name">CODEGRAM</h1>
+
+    </div>
+
+    <div id="search">
+      <input type="text" class="searchbar" placeholder="Search" value>
+      <span class=" search-glyph glyphicon glyphicon-search" aria-hidden="true"></span>
+    </div>
+
+    <div class="nav-links">
+
+
+      <a href="#">
+        <span id="myBtn" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </a>
+
+
+      <a href="#">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      </a>
+
+
+      <a href="#">
+        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+      </a>
+
+      <a href="#">Sign Out</a>
+
+
+    </div>
+
+  </nav>
+
+
+
+  <div class="container" id="panel">
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <form action="#" method="post">
+
+          <div>
+            <label class="header">Picture of Project: </label>
+            <input id="image" type="file" name="project_photo" placeholder="Picture" required="" capture>
+          </div>
+          <br>
+          <div>
+            <label class="header">Title: </label>
+            <input type="text" id="store_name" name="project_name" placeholder="Project Name" title="Please enter your Project" required="">
+          </div>
+          <br>
+          <div>
+            <label class="header">Category: </label>
+            <select name="Category">
+              <option value="game">game</option>
+              <option value="website">website</option>
+              <option value="project">project</option>
+              <option value="other">other</option>
+            </select>
+          </div>
+          <br>
+          <input type="submit" value="Register">
+        </form>
+      </div>
+
+      <div id="popular">
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>
