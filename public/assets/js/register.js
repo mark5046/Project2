@@ -1,45 +1,43 @@
-$(document).ready(function() {
-    // Getting references to our form and input
-    var signUpForm = $("form.signup");
-    var emailInput = $("input#email-input");
-    var passwordInput = $("input#password-input");
-    var userInput = $("input#username-input")
-  
-    // When the signup button is clicked, we validate the email and password are not blank
-    signUpForm.on("submit", function(event) {
-      event.preventDefault();
-      var userData = {
-        username: usernameInput.val().trim(),
-        email: emailInput.val().trim(),
-        password: passwordInput.val().trim()
-      };
-  
-      if (!userData.email || !userData.password || !userData.username) {
-        return;
+$(document).ready(function () {
+  var signUpForm = $("form.signup");
+  var emailInput = $("input#email-input");
+  var passwordInput = $("input#password-input");
+  var usernameInput = $("input#username-input")
+
+  $("#submit-btn").on("click", function (event) {
+    event.preventDefault()
+    
+    var userData = {
+      username: usernameInput.val().trim(),
+      email: emailInput.val().trim(),
+      password: passwordInput.val().trim()
+    };
+    $.post("/api/users", userData).then(function (data) {
+      console.log(data)
+
+      // FOR FRONT END - we need the bottom console logs (errors) to be displayed on html
+      if (data.errors[0].message === "Validation len on username failed") {
+        console.log("Your username needs to have minimum 6 and maximum 14 characters")
       }
-      // If we have an email and password, run the signUpUser function
-      signUpUser(userData.username, userData.email, userData.password);
-      emailInput.val("");
-      passwordInput.val("");
-      usernameInput.val("");
-    });
-  
-    // Does a post to the signup route. If successful, we are redirected to the members page
-    // Otherwise we log any errors
-    function signUpUser(username, email, password) {
-      $.post("/register", {
-        username: username,
-        email: email,
-        password: password
-      }).then(function(data) {
-        window.location.replace(data);
-        // If there's an error, handle it by throwing up a boostrap alert
-      }).catch(handleLoginErr);
-    }
-  
-    function handleLoginErr(err) {
-      $("#alert .msg").text(err.responseJSON);
-      $("#alert").fadeIn(500);
-    }
-  });
-  
+
+      else if (data.errors[0].message === "Validation len on password failed") {
+        console.log("Your password needs to have minimum 6 and maximum 14 characters")
+      }
+
+      else if (data.errors[0].message === "email must be unique") {
+        console.log("Provided email already exists")
+      }
+
+      else if (data.errors[0].message === "username must be unique") {
+        console.log("Provided username already exists")
+      }
+
+      else if (data.errors[0].message === "Validation isEmail on email failed") {
+        console.log("Please fill out your email address correctly")
+      }
+
+      
+
+    })
+  })
+});

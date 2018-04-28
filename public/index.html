@@ -9,14 +9,14 @@
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Roboto" rel="stylesheet">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
-  <script type="text/javascript " src="./assets/javascript/index.js"></script>
-  <title>Project2</title>
+
+  <title>Document</title>
 </head>
 
 <body>
 
-  <nav id="navbar" class="navbar">
+
+  <nav id="navbar" class="navbar-main">
 
     <div class="name">
 
@@ -25,60 +25,93 @@
 
     </div>
 
-    <div id="search">
-      <input type="text" class="searchbar" placeholder="Search" value>
-      <span class=" search-glyph glyphicon glyphicon-search" aria-hidden="true"></span>
-    </div>
+
 
     <div class="nav-links">
 
-
-      <a href="#">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      </a>
-
-      <a href="#">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-      </a>
-
-
-      <a href="#">
-        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-      </a>
-
-      <a href="#">Sign Out</a>
-
+      <form class="login">
+        <input id="loginemail-input" type="e-mail" placeholder=" E-mail">
+        <input id="loginpassword-input" type="password" placeholder=" Password">
+        <button id="login-btn" class="login-btn btn btn-primary" type="button">Log In</button>
+      </form>
 
     </div>
 
   </nav>
 
-  <div class="container" id="panel">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">UserName:</h3>
-      </div>
-      <div class="panel-body">
-        <div id="post">
-          <img class="img-post" src="./assets/images/hangman.png">
-        </div>
-        <button type="button">
-          <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-        </button>
-        <button type="button">
-          <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-        </button>
-        <p class="feed-text">
-          <span class="username">username: </span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa veritatis illo sit in tempore
-          aliquid ratione asperiores quae! Sequi hic accusamus libero est totam fugiat! Tenetur accusamus deserunt odit saepe!</p>
-        <hr>
 
-        <input class="comment" type="text" placeholder="Add Comment">
+  <div class="video-container">
+
+
+    <div class="filter">
+      <div id="typewriter"></div>
+      <video autoplay loop class="fillWidth">
+        <source src="../public/assets/images/Workaholic.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+      </video>
+
+      <div class="lower-video">
+        <div id="landing-btn"></div>
+        <button class="btn btn-primary landing-btn" type="button">Sign Up!</button>
+      </div>
+
+
+    </div>
+
+    <div id="about-us">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h3>Community</h3>
+            <hr>
+            <p class="about-us">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quod consequuntur nostrum ex, magnam quae atque saepe voluptates
+              temporibus maxime beatae sint cumque minima aut fuga, repellat facilis in iusto. Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Suscipit dignissimos placeat cum quibusdam, itaque est. Ullam ipsum explicabo
+              error dolorem esse voluptatum nesciunt consequuntur provident optio veritatis, doloribus sed laudantium. Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptatibus, laboriosam tempore ex cupiditate
+              vel corporis ipsa pariatur nihil culpa aliquam officia magnam ipsam eos, earum laborum iusto veniam magni!
+            </p>
+            <br>
+          </div>
+          <div class="col-lg-6">
+
+            <form class="signup modal-content">
+
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" id="email-input" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputUsername">Username</label>
+                <input type="username" class="form-control" id="username-input" placeholder="Username">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="password-input" placeholder="Password">
+              </div>
+              <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <span class="msg"></span>
+              </div>
+              <p class="signup-p">By creating an account you agree to our
+                <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+              <button type="submit" id="submit-btn" class="btn btn-default">Sign Up</button>
+            </form>
+          </div>
+        </div>
+
+
 
       </div>
     </div>
   </div>
 
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+  <script type="text/javascript " src="./assets/javascript/script.js"></script>
+  <script type="text/javascript " src="./assets/js/register.js"></script>
+  <script type="text/javascript " src="./assets/js/login.js"></script>
 </body>
 
 </html>

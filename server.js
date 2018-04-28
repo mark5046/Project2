@@ -15,35 +15,11 @@ app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes
-// require("./routes/html-routes.js")(app);
+require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
-// require("./routes/post-api-routes.js")(app);
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
-
-app.get('/', function(req, res){
-  var title = 'Welcome';
-  res.render('index', {
-    title: title
-  });
-});
-
-app.get('/about', function(req, res){
-  
-  res.render('about');
-});
-
-app.get('/login', function(req, res){
-  
-  res.render('login');
-});
-
-app.get('/register', function(req, res){
-  
-  res.render('register');
-})
 
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
