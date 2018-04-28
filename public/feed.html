@@ -9,7 +9,8 @@
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Roboto" rel="stylesheet">
-  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+  <script type="text/javascript " src="./assets/javascript/index.js"></script>
   <title>Project2</title>
 </head>
 
@@ -33,8 +34,9 @@
 
 
       <a href="#">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        <span id="myBtn" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       </a>
+
 
       <a href="#">
         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -52,7 +54,44 @@
 
   </nav>
 
+
+
   <div class="container" id="panel">
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <form action="#" method="post">
+
+          <div>
+            <label class="header">Picture of Project: </label>
+            <input id="image" type="file" name="project_photo" placeholder="Picture" required="" capture>
+          </div>
+          <br>
+          <div>
+            <label class="header">Title: </label>
+            <input type="text" id="store_name" name="project_name" placeholder="Project Name" title="Please enter your Project" required="">
+          </div>
+          <br>
+          <div>
+            <label class="header">Category: </label>
+            <select name="Category">
+              <option value="game">game</option>
+              <option value="website">website</option>
+              <option value="project">project</option>
+              <option value="other">other</option>
+            </select>
+          </div>
+          <br>
+          <input type="submit" value="Register">
+        </form>
+
+
+      </div>
+
+    </div>
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">UserName:</h3>
@@ -78,9 +117,6 @@
     </div>
   </div>
 
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
-  <script type="text/javascript " src="./assets/javascript/index.js"></script>
 </body>
 
 </html>
