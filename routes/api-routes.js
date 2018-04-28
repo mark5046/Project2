@@ -1,5 +1,6 @@
 var db = require("../models");
 var passport = require("../config/passport");
+var loginData = []
 
 module.exports = function (app) {
 
@@ -20,8 +21,24 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/api/login", function (req, res) {
+  // app.post("/api/users", function (req, res) {
+  //   console.log(req.body);
+  //   if (req.body.username === )
+  //   db.User.update({
+  //     email: req.body.email,
+  //     password: req.body.password,
+  //     profile_pic: req.body.profile_pic,
+  //     github_link: req.body.github_link,
+  //     bio: req.body.bio
+  //   }).then(function () {
+  //     res.redirect(307, "/feed");
+  //   }).catch(function (err) {
+  //     console.log(err);
+  //     res.json(err);
+  //   });
+  // });
 
+  app.post("/api/login", function (req, res) {
     db.User.findOne({
       where: {
         email: req.body.email
@@ -31,9 +48,14 @@ module.exports = function (app) {
         console.log("this email does not exist") // FOR FRONT END - this console log needs to be displayed on html
       }
       else if (req.body.email === data.dataValues.email) {
-        res.redirect("http://localhost:/feed")
+        loginData.push(req.body);
+        res.json(data);
       }
     })
+  })
+
+  app.get("/api/login", function (req, res) {
+    res.json(loginData)
   })
 
   app.get("/api/users", function (req, res) {
