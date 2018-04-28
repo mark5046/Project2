@@ -1,9 +1,28 @@
 var db = require("../models");
-var loginData = []
+var passport = require("../config/passport");
 
 // -----------------SIGN UP, LOGIN AND USER DATABASE--------------------------------------------------------
 
 module.exports = function (app) {
+
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+    res.json("/feed");
+  });
+
+  // DISPLAYS USERS THAT ARE LOGGED IN
+  app.get("/api/user_data", function(req, res) {
+    if (!req.user) {
+      
+      res.json({});
+    }
+    else {
+      
+      res.json({
+        email: req.user.email,
+        id: req.user.id
+      });
+    }
+  });
 
   // CREATES NEW USER AND DIRECTS TO FEEDS
   app.post("/api/users", function (req, res) {
@@ -16,34 +35,18 @@ module.exports = function (app) {
       github_link: req.body.github_link,
       bio: req.body.bio
     }).then(function () {
-      // res.redirect("/feed");
+      res.redirect("/feed");
     }).catch(function (err) {
       console.log(err);
       res.json(err);
     });
   });
 
-  // CHECKS LOGIN IF EMAIL EXISTS, POSTS LOGIN DATA TO ROUTE
-  app.post("/api/login", function (req, res) {
-    db.User.findOne({
-      where: {
-        email: req.body.email
-      }
-    }).then(function (data) {
-      if (data === null) {
-        console.log("this email does not exist") // FOR FRONT END - this console log needs to be displayed on html
-      }
-      else if (req.body.email === data.dataValues.email) {
-        loginData.push(req.body);
-        res.json(loginData);
-      }
-    })
-  })
-
-  // DISPLAYS WHO'S LOGGED IN
-  app.get("/api/login", function (req, res) {
-    res.json(loginData)
-  })
+  // Route for log out
+  app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
+  });
 
   // DISPLAYS ALL USERS IN THE DATABASE
   app.get("/api/users", function (req, res) {
