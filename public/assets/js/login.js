@@ -11,6 +11,7 @@ $(document).ready(function () {
       password: passwordInput.val().trim()
     };
     $.post("/api/login", userData).then(function (data) {
+      window.location.href = "/feed";
     })
   })
 });

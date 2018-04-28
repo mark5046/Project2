@@ -1,7 +1,5 @@
 var path = require("path");
 
-var Authentication = require("../config/middleware/authentication");
-
 module.exports = function(app) {
   
 
