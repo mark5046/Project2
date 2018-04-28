@@ -4,11 +4,13 @@
     "password": "root",
     "database": "instacode",
     "host": "127.0.0.1",
+    "port": 3308,
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "root",
+    "port": 3308,
     "database": "instacode",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -16,6 +18,7 @@
   "production": {
     "username": "root",
     "password": "root",
+    "port": 3308,
     "database": "instacode",
     "host": "127.0.0.1",
     "dialect": "mysql"
