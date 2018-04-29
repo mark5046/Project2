@@ -5,18 +5,17 @@ var passport = require("../config/passport");
 
 module.exports = function (app) {
 
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+  // AUTHENTICATES USER AT LOGIN AND DIRECTS TO FEEDS
+  app.post("/api/login", passport.authenticate("local"), function (req, res) {
     res.json("/feed");
   });
 
   // DISPLAYS USERS THAT ARE LOGGED IN
-  app.get("/api/user_data", function(req, res) {
+  app.get("/api/user_data", function (req, res) {
     if (!req.user) {
-      
       res.json({});
     }
     else {
-      
       res.json({
         email: req.user.email,
         id: req.user.id
@@ -24,9 +23,8 @@ module.exports = function (app) {
     }
   });
 
-  // CREATES NEW USER AND DIRECTS TO FEEDS
+  // CREATES NEW USER AND DIRECTS TO LOGIN AT MAIN PAGE
   app.post("/api/users", function (req, res) {
-    console.log(req.body);
     db.User.create({
       username: req.body.username,
       email: req.body.email,
@@ -43,7 +41,7 @@ module.exports = function (app) {
   });
 
   // Route for log out
-  app.get("/logout", function(req, res) {
+  app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
   });
@@ -57,12 +55,24 @@ module.exports = function (app) {
 
   // FIND USERS BY USERNAME
   app.get("/api/users/:username", function (req, res) {
-    db.User.findOne({
+    db.User.findAll({
+      include: [db.Post],
       where: {
         username: req.params.username,
       }
     }).then(function (User) {
-      console.log(User);
+      res.json(User);
+    });
+  });
+
+  // FIND USERS BY ID
+  app.get("/api/users/:id", function (req, res) {
+    db.User.findAll({
+      include: [db.Post],
+      where: {
+        id: req.params.id,
+      }
+    }).then(function (User) {
       res.json(User);
     });
   });
@@ -86,6 +96,19 @@ module.exports = function (app) {
 
   // -------------------------------POSTS--------------------------------------------------
 
+  app.post("/api/posts", function (req, res) {
+    db.Post.create({
+      title: req.body.title,
+      description: req.body.description,
+      category: req.body.category
+    }).then(function () {
+      res.redirect("/feed");
+    }).catch(function (err) {
+      console.log(err);
+      res.json(err);
+    });
+  });
+
   // DISPLAYS ALL POSTS IN THE DATABASE
   app.get("/api/posts", function (req, res) {
     db.Post.findAll({}).then(function (result) {
@@ -94,14 +117,13 @@ module.exports = function (app) {
   })
 
   // FIND POSTS BY TITLE
-  app.get("/api/posts/:title", function(req, res) {
+  app.get("/api/posts/:title", function (req, res) {
     db.Post.findAll({
       include: [db.User],
       where: {
         title: req.params.title,
       }
-    }).then(function(Post) {
-      console.log(Post);
+    }).then(function (Post) {
       res.json(Post);
     });
   });
@@ -120,17 +142,28 @@ module.exports = function (app) {
   // });
 
   // FIND POSTS BY CATEGORY
-  app.get("/api/posts/:category", function(req, res) {
+  app.get("/api/posts/:category", function (req, res) {
     db.Post.findAll({
       include: [db.User],
       where: {
         category: req.params.category,
       }
-    }).then(function(Post) {
-      console.log(Post);
+    }).then(function (Post) {
       res.json(Post);
     });
   });
 
+// ---------------------SEARCH----------------------------
 
-};
+//SEARCH USERS BY USERNAME THROUGH SEARCHBAR
+app.get("/api/search", function (req, res) {
+  db.User.findAll({
+    where: {
+      username: req.body.searchTerm
+    }
+  }).then(function (result) {
+    res.json(result)
+  })
+})
+
+}; // END LINE OF MODULE EXPORTS

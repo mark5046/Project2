@@ -9,8 +9,7 @@
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Roboto" rel="stylesheet">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
-  <script type="text/javascript " src="./assets/javascript/index.js"></script>
+  
   <title>Project2</title>
 </head>
 
@@ -26,8 +25,9 @@
     </div>
 
     <div id="search">
-      <input type="text" class="searchbar" placeholder="Search" value>
+      <input id = "search-input" type="text" class="searchbar" placeholder="Search" value>
       <span class=" search-glyph glyphicon glyphicon-search" aria-hidden="true"></span>
+      <button type="submit" id="search-btn" class="btn btn-default">Search</button>
     </div>
 
     <div class="nav-links">
@@ -62,21 +62,21 @@
       <div class="modal-content">
         <span class="close">&times;</span>
 
-        <form action="#" method="post">
+        <form>
 
-          <div>
+          <!-- <div>
             <label class="header">Picture of Project: </label>
-            <input id="image" type="file" name="project_photo" placeholder="Picture" required="" capture>
-          </div>
+            <input id="image-input" type="file" name="project_photo" placeholder="Picture" required="" capture>
+          </div> -->
           <br>
           <div>
             <label class="header">Title: </label>
-            <input type="text" id="store_name" name="project_name" placeholder="Project Name" title="Please enter your Project" required="">
+            <input type="text" id="title-input" name="project_name" placeholder="Project Name" title="Please enter your Project" required="">
           </div>
           <br>
           <div>
             <label class="header">Category: </label>
-            <select name="Category">
+            <select name="Category" id="category-input">
               <option value="game">game</option>
               <option value="website">website</option>
               <option value="project">project</option>
@@ -84,7 +84,18 @@
             </select>
           </div>
           <br>
-          <input type="submit" value="Register">
+          <div>
+            <label class="header">Description: </label>
+            <input type="text" id="description-input" name="" placeholder="Description" title="Please enter your description" required="">
+          </div>
+          <br>
+          <div class="form-group">
+            <label>Select User:</label>
+            <select class="custom-select" id="user">
+            </select>
+          </div>
+          <br>
+          <button id="submit-post" type="submit" value="Register">Register</button>
         </form>
 
 
@@ -117,6 +128,10 @@
     </div>
   </div>
 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+  <script type="text/javascript " src="./assets/javascript/index.js"></script>
+  <script type="text/javascript " src="./assets/js/post.js"></script>
+  <script type="text/javascript " src="./assets/js/search.js"></script>
 </body>
 
 </html>
