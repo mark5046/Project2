@@ -5,18 +5,17 @@ var passport = require("../config/passport");
 
 module.exports = function (app) {
 
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+  // AUTHENTICATES USER AT LOGIN AND DIRECTS TO FEEDS
+  app.post("/api/login", passport.authenticate("local"), function (req, res) {
     res.json("/feed");
   });
 
   // DISPLAYS USERS THAT ARE LOGGED IN
-  app.get("/api/user_data", function(req, res) {
+  app.get("/api/user_data", function (req, res) {
     if (!req.user) {
-      
       res.json({});
     }
     else {
-      
       res.json({
         email: req.user.email,
         id: req.user.id
@@ -24,9 +23,8 @@ module.exports = function (app) {
     }
   });
 
-  // CREATES NEW USER AND DIRECTS TO FEEDS
+  // CREATES NEW USER AND DIRECTS TO LOGIN AT MAIN PAGE
   app.post("/api/users", function (req, res) {
-    console.log(req.body);
     db.User.create({
       username: req.body.username,
       email: req.body.email,
@@ -43,7 +41,7 @@ module.exports = function (app) {
   });
 
   // Route for log out
-  app.get("/logout", function(req, res) {
+  app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
   });
@@ -62,7 +60,6 @@ module.exports = function (app) {
         username: req.params.username,
       }
     }).then(function (User) {
-      console.log(User);
       res.json(User);
     });
   });
@@ -94,13 +91,13 @@ module.exports = function (app) {
   })
 
   // FIND POSTS BY TITLE
-  app.get("/api/posts/:title", function(req, res) {
+  app.get("/api/posts/:title", function (req, res) {
     db.Post.findAll({
       include: [db.User],
       where: {
         title: req.params.title,
       }
-    }).then(function(Post) {
+    }).then(function (Post) {
       console.log(Post);
       res.json(Post);
     });
@@ -120,13 +117,13 @@ module.exports = function (app) {
   // });
 
   // FIND POSTS BY CATEGORY
-  app.get("/api/posts/:category", function(req, res) {
+  app.get("/api/posts/:category", function (req, res) {
     db.Post.findAll({
       include: [db.User],
       where: {
         category: req.params.category,
       }
-    }).then(function(Post) {
+    }).then(function (Post) {
       console.log(Post);
       res.json(Post);
     });

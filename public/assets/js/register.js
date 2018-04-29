@@ -16,29 +16,6 @@ $(document).ready(function () {
       return;
     }
 
-    // $.post("/api/users", userData).then(function (data) {
-    //   console.log(data)
-    //   // FOR FRONT END - we need the bottom console logs (errors) to be displayed on html
-    //   if (data === "") {
-    //     window.location.href = "/feed"; // doesnt work
-    //   }
-    //   if (data.errors[0].message === "Validation len on username failed") {
-    //     console.log("Your username needs to have minimum 6 and maximum 14 characters");
-    //   }
-    //   else if (data.errors[0].message === "Validation len on password failed") {
-    //     console.log("Your password needs to have minimum 6 and maximum 14 characters");
-    //   }
-    //   else if (data.errors[0].message === "email must be unique") {
-    //     console.log("Provided email already exists");
-    //   }
-    //   else if (data.errors[0].message === "username must be unique") {
-    //     console.log("Provided username already exists");
-    //   }
-    //   else if (data.errors[0].message === "Validation isEmail on email failed") {
-    //     console.log("Please fill out your email address correctly");
-    //   };
-    // });
-
     signUpUser(userData.email, userData.password, userData.username);
     emailInput.val("");
     passwordInput.val("");
@@ -50,29 +27,27 @@ $(document).ready(function () {
       email: email,
       password: password,
       username: username
-    }).then(function(data) {
-      console.log(data)
-      // FOR FRONT END - we need the bottom console logs (errors) to be displayed on html
-      
-        window.location.href = "/feed"; // doesnt work
-      
-      // else if (data != null) {
-      //   if (data.errors[0].message === "Validation len on username failed") {
-      //     console.log("Your username needs to have minimum 6 and maximum 14 characters");
-      //   }
-      //   else if (data.errors[0].message === "Validation len on password failed") {
-      //     console.log("Your password needs to have minimum 6 and maximum 14 characters");
-      //   }
-      //   else if (data.errors[0].message === "email must be unique") {
-      //     console.log("Provided email already exists");
-      //   }
-      //   else if (data.errors[0].message === "username must be unique") {
-      //     console.log("Provided username already exists");
-      //   }
-      //   else if (data.errors[0].message === "Validation isEmail on email failed") {
-      //     console.log("Please fill out your email address correctly");
-      //   };
-      // }
+    }).then(function (data) {
+      // FOR FRONT END - we need the bottom console logs (errors) to be displayed on html - ignore this for now
+
+      if (data) {
+        window.location.href = "/";
+      }
+      else if (data.errors[0].message === "Validation len on username failed") {
+        console.log("Your username needs to have minimum 6 and maximum 14 characters");
+      }
+      else if (data.errors[0].message === "Validation len on password failed") {
+        console.log("Your password needs to have minimum 6 and maximum 14 characters");
+      }
+      else if (data.errors[0].message === "email must be unique") {
+        console.log("Provided email already exists");
+      }
+      else if (data.errors[0].message === "username must be unique") {
+        console.log("Provided username already exists");
+      }
+      else if (data.errors[0].message === "Validation isEmail on email failed") {
+        console.log("Please fill out your email address correctly");
+      }
     }).catch(handleLoginErr);
   }
 
