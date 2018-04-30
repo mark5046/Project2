@@ -18,13 +18,13 @@ $(document).ready(function () {
       }
       $.post("/api/posts", postData).then(function (data) {
         window.location.href = "/feed"
-
       })
-    
+    })
+
   
     function handleLoginErr(err) {
       $("#alert .msg").text(err.responseJSON);
       $("#alert").fadeIn(500);
     }
-  });
-})
+
+  })
