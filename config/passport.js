@@ -15,12 +15,12 @@ passport.use(new LocalStrategy(
     }).then(function(dbUser) {
       if (!dbUser) {
         return done(null, false, {
-          message: "ERR 404: Incorrect email provided."
+          message: "Incorrect email."
         });
       }
       else if (!dbUser.validPassword(password)) {
         return done(null, false, {
-          message: "ERR 404: Incorrect password provided."
+          message: "Incorrect password."
         });
       }
       return done(null, dbUser);

@@ -1,19 +1,16 @@
 var path = require("path");
-
-var Authentication = require("../config/middleware/authentication");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
-  
-
   app.get("/", function (req, res) {
+
+    if (req.user) {
+      res.redirect("/feed");
+    }
     res.sendFile(path.join(__dirname, "../public/index.html"));
   })
 
-  app.get("/feed", function (req, res) {
+  app.get("/feed", isAuthenticated, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/feed.html"));
   })
-
-  
-
-  
 };
