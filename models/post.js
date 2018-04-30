@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 
         repo_link: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
         },
 
         username: {

@@ -1,28 +1,30 @@
 $(document).ready(function () {
-    var searchInput = $("input#search-input");
-
+    
     $("#search-btn").on("click", function (event) {
+
+        var searchInput = $("#search-input").val();
+        console.log(searchInput);
         event.preventDefault()
 
-        var userData = {
-            searchTerm: searchInput.val().trim()
-          };
-
-        if (!userData.searchTerm) {
-            return;
-        }
+        $.get("/api/search/" + searchInput).then(function(data){
+            console.log(data)
+        })
         
-        searchUser(userData.searchTerm);
-        searchInput.val("");
+        $("#search-input").val("");
+
     })
 
-    function searchUser(searchTerm) {
-        $.post("/api/search", {
-            searchTerm: searchTerm
-        }).then(function (data) {
-            window.location.replace(data);
-        }).catch(function (err) {
-            console.log(err);
-        });
-    }
+    $("#searchuser-btn").on("click", function (event) {
+
+        var searchInput = $("#searchuser-input").val();
+        console.log(searchInput);
+        event.preventDefault()
+
+        $.get("/api/searchuser/" + searchInput).then(function(data){
+            console.log(data)
+        })
+        
+        $("#searchuser-input").val("");
+
+    })
 });
