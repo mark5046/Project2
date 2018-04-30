@@ -30,13 +30,9 @@ $(document).ready(function () {
       $("#alert").fadeIn(500);
     }
 
+    $.get("/api/posts").then(function(data){
+      console.log(data)
+    });
+
   });
-
-  $.get("/api/posts").then(function(data){
-    console.log(data)
-  });
-});
-
-
-  })
 
