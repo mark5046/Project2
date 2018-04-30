@@ -21,9 +21,23 @@ require("./routes/api-routes.js")(app);
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.get("/about", function(req, res) {
+
+  res.render("about")
+});
+
+app.get("/login", function(req, res) {
+
+  res.render("login")
+});
+
+app.get("/register", function(req, res) {
+
+  res.render("/register")
+});
+
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
     console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
 });
-
