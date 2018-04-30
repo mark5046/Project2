@@ -18,6 +18,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
 
+        repo_link: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+
         comments: {
             type: DataTypes.TEXT,
             validate: {
@@ -31,14 +41,14 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
-    Post.associate = (models) => {
-        Post.belongsTo(models.User, {
-            onDelete: "CASCADE",
-            foreignKey: {
-                allowNull: false
-            }
-        });
-    };
+    // Post.associate = (models) => {
+    //     Post.belongsTo(models.User, {
+    //         onDelete: "CASCADE",
+    //         foreignKey: {
+    //             allowNull: false
+    //         }
+    //     });
+    // };
 
     return Post;
 }

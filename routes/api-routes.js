@@ -12,6 +12,7 @@ module.exports = function (app) {
 
   // DISPLAYS USERS THAT ARE LOGGED IN
   app.get("/api/user_data", function (req, res) {
+    console.log(req.user.username)
     if (!req.user) {
       res.json({});
     }
@@ -56,7 +57,6 @@ module.exports = function (app) {
   // FIND USERS BY USERNAME
   app.get("/api/users/:username", function (req, res) {
     db.User.findAll({
-      include: [db.Post],
       where: {
         username: req.params.username,
       }
@@ -68,7 +68,6 @@ module.exports = function (app) {
   // FIND USERS BY ID
   app.get("/api/users/:id", function (req, res) {
     db.User.findAll({
-      include: [db.Post],
       where: {
         id: req.params.id,
       }
@@ -97,16 +96,20 @@ module.exports = function (app) {
   // -------------------------------POSTS--------------------------------------------------
 
   app.post("/api/posts", function (req, res) {
+    if (req.user) {
     db.Post.create({
       title: req.body.title,
       description: req.body.description,
-      category: req.body.category
+      category: req.body.category,
+      username: req.user.username,
+      repo_link: req.body.repo_link
     }).then(function () {
       res.redirect("/feed");
     }).catch(function (err) {
       console.log(err);
       res.json(err);
     });
+  }
   });
 
   // DISPLAYS ALL POSTS IN THE DATABASE
@@ -119,7 +122,6 @@ module.exports = function (app) {
   // FIND POSTS BY TITLE
   app.get("/api/posts/:title", function (req, res) {
     db.Post.findAll({
-      include: [db.User],
       where: {
         title: req.params.title,
       }
@@ -127,6 +129,8 @@ module.exports = function (app) {
       res.json(Post);
     });
   });
+
+  
 
   // FIND POSTS BY USER
   // app.get("/api/posts/:title", function(req, res) {
