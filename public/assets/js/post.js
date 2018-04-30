@@ -9,7 +9,7 @@ $(document).ready(function () {
       var postData = {
         title: titleInput.val().trim(),
         description: descriptionInput.val().trim(),
-        category: categoryInput.val().trim()
+        category: categoryInput
       };
   
       if (!postData.title || !postData.description || !postData.category) {

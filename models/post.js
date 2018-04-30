@@ -29,21 +29,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER
         },
 
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
-
     });
 
-    // Post.associate = (models) => {
-    //     Post.belongsTo(models.User, {
-    //         onDelete: "CASCADE",
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
+    Post.associate = (models) => {
+        Post.belongsTo(models.User, {
+            onDelete: "CASCADE",
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
 
     return Post;
 }

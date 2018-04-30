@@ -53,12 +53,12 @@ module.exports = (sequelize, DataTypes) => {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
       });
 
-    // User.associate = function (models) {
+    User.associate = function (models) {
 
-    //     User.hasMany(models.Post, {
-    //         onDelete: "cascade"
-    //     });
-    // };
+        User.hasMany(models.Post, {
+            onDelete: "cascade"
+        });
+    };
 
     return User;
 }
