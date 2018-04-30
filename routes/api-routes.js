@@ -12,14 +12,16 @@ module.exports = function (app) {
 
   // DISPLAYS USERS THAT ARE LOGGED IN
   app.get("/api/user_data", function (req, res) {
-    console.log(req.user.username)
     if (!req.user) {
       res.json({});
     }
     else {
       res.json({
+        id: req.user.id,
         email: req.user.email,
-        id: req.user.id
+        username: req.user.username,
+        github_link: req.user.github_link,
+        bio: req.user.bio
       });
     }
   });
@@ -95,6 +97,7 @@ module.exports = function (app) {
 
   // -------------------------------POSTS--------------------------------------------------
 
+  // CREATES POST
   app.post("/api/posts", function (req, res) {
     if (req.user) {
     db.Post.create({
@@ -119,55 +122,66 @@ module.exports = function (app) {
     })
   })
 
-  // FIND POSTS BY TITLE
-  app.get("/api/posts/:title", function (req, res) {
-    db.Post.findAll({
-      where: {
-        title: req.params.title,
-      }
-    }).then(function (Post) {
-      res.json(Post);
-    });
+// ---------------------PROFILE---------------------------
+
+// DISPLAY PROFILE OF LOGGED IN USER
+app.get("api/users/:username", function(req, res) {
+  db.User.findOne({
+    where: {
+      username: req.user.username
+    }
+  }).then(function(result) {
+    res.json(result);
   });
-
-  
-
-  // FIND POSTS BY USER
-  // app.get("/api/posts/:title", function(req, res) {
-  //   db.Post.findAll({
-  //     include: [db.User],
-  //     where: {
-  //       title: req.params.title,
-  //     }
-  //   }).then(function(Post) {
-  //     console.log(Post);
-  //     res.json(Post);
-  //   });
-  // });
-
-  // FIND POSTS BY CATEGORY
-  app.get("/api/posts/:category", function (req, res) {
-    db.Post.findAll({
-      include: [db.User],
-      where: {
-        category: req.params.category,
-      }
-    }).then(function (Post) {
-      res.json(Post);
-    });
-  });
+});
 
 // ---------------------SEARCH----------------------------
 
-//SEARCH USERS BY USERNAME THROUGH SEARCHBAR
-app.get("/api/search", function (req, res) {
+//SEARCH USER BY SEARCHTERM
+app.get("/api/searchuser/:term", function(req, res) {
   db.User.findAll({
     where: {
-      username: req.body.searchTerm
+      username: req.params.term
+    }
+  }).then(function (result) {
+      res.json(result)
+    })
+  })
+
+//SEARCH POSTS BY SEARCHTERM
+app.get("/api/search/:term", function (req, res) {
+  db.Post.findAll({
+    where: {
+      username: req.params.term
     }
   }).then(function (result) {
     res.json(result)
   })
 })
+
+// FIND POSTS BY TITLE
+// app.get("/api/search/:term", function (req, res) {
+//   db.Post.findAll({
+//     where: {
+//       title: req.params.term,
+//     }
+//   }).then(function (result) {
+//     res.json(result);
+//   });
+// });
+
+// FIND POSTS BY CATEGORY
+// app.get("/api/search/:term", function (req, res) {
+//   db.Post.findAll({
+    
+//     where: {
+//       category: req.params.term,
+//     }
+//   }).then(function (result) {
+//     res.json(result);
+//   });
+// });
+
+
 
 }; // END LINE OF MODULE EXPORTS
