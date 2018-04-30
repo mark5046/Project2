@@ -285,3 +285,8 @@ img {
 .whatever {
   color: black;
 }
+
+#content-input {
+  width: 100%;
+  text-overflow: ellipsis;
+}
